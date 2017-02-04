@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BUFFER 1024
+#define BUFFER_SIZE 1024 // #define buffer size
 
 int main(int argc, char **argv)
 {
 	char *fname = argv[1]; // 1st command line argument is the file name
 
-	if (argc > 1)
+	if (argc < 2) // If the argument count is less than 2, then the user did not enter a file name
 	{
 		perror("Expected filename.");
-		return 5;
+		return 5; // I/O Error
 	}
 
-	FILE *file = fopen(fname, "r");
+	FILE *file = fopen(fname, "r"); // OPEN the file
 
-	char *string = malloc(sizeof(char) * BUFFER);
+	char string[BUFFER_SIZE]; // Set array to size BUFFER_SIZE
 
 	if (file == NULL) // If file doesn't exist...or something went wrong.
 	{
@@ -25,7 +25,8 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		while (fgets(string, BUFFER, file) != NULL)
+		while (fgets(string, BUFFER_SIZE, file) != NULL) // Start looping through each line of the file until 
+														 // reaching NULL (the end)
 		{
 			printf("%s", string);
 		}
@@ -36,6 +37,6 @@ int main(int argc, char **argv)
 	free(string); // Free and close all the things
 	fclose(file);
 
-	return 0;
+	return 0; // All done!
 }
 
