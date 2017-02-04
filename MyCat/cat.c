@@ -25,8 +25,8 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		while (fgets(string, BUFFER_SIZE, file) != NULL) // Start looping through each line of the file until 
-														 // reaching NULL (the end)
+		// Start looping through each line of the file until reaching NULL (the end)
+		while (fgets(string, BUFFER_SIZE, file) != NULL) 
 		{
 			printf("%s", string);
 		}
